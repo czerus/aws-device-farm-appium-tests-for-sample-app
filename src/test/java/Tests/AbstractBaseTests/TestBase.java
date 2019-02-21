@@ -72,12 +72,29 @@ public abstract class TestBase {
     @BeforeSuite
     public void setUpAppium() throws MalformedURLException {
 
-        final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
+        // This is for running local
+        // final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
+        String user_name = System.getenv("SAUCE_USERNAME");
+        String access_key = System.getenv("SAUCE_ACCESS_KEY");
+        String build_info = System.getenv("BUILD_TAG");
+        final String URL_STRING = "https://" + user_name + ":" + access_key + "@ondemand.saucelabs.com:443/wd/hub";
 
         URL url = new URL(URL_STRING);
 
         //Use a empty DesiredCapabilities object
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        // capabilities.setCapability("deviceName", "Pixel Emulator");
+        // Desired cap for running on SauceLabs
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("deviceName", "Samsung Galaxy S4 Emulator");
+        capabilities.setCapability("platformVersion", "4.4");
+        capabilities.setCapability("app", "https://github.com/aws-samples/aws-device-farm-sample-app-for-android/blob/master/prebuilt/app-debug.apk?raw=true");
+        capabilities.setCapability("appPackage", "com.amazonaws.devicefarm.android.referenceapp");
+        capabilities.setCapability("appActivity", ".Activities.MainActivity");
+        capabilities.setCapability("browserName", "");
+        capabilities.setCapability("deviceOrientation", "portrait");
+        capabilities.setCapability("appiumVersion", "1.7.2");
+        capabilities.setCapability("build", build_info);
 
         driver = new AndroidDriver<MobileElement>(url, capabilities);
 
