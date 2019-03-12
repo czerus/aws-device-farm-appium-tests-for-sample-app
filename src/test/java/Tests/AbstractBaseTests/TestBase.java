@@ -74,10 +74,11 @@ public abstract class TestBase {
 
         // This is for running local
         // final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
-        String user_name = System.getenv("SAUCE_USERNAME");
-        String access_key = System.getenv("SAUCE_ACCESS_KEY");
+        String user_name = System.getenv("TO_USERNAME");
+        String access_key = System.getenv("TO_API_KEY");
         String build_info = System.getenv("BUILD_TAG");
-        final String URL_STRING = "https://" + user_name + ":" + access_key + "@ondemand.saucelabs.com:443/wd/hub";
+        final String URL_STRING = "https://eu1.appium.testobject.com/wd/hub";
+        // final String URL_STRING = "https://" + user_name + ":" + access_key + "@ondemand.saucelabs.com:443/wd/hub";
 
         URL url = new URL(URL_STRING);
 
@@ -85,15 +86,27 @@ public abstract class TestBase {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         // capabilities.setCapability("deviceName", "Pixel Emulator");
         // Desired cap for running on SauceLabs
+        capabilities.setCapability("testobject_api_key", access_key);
         capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "Samsung Galaxy S4 Emulator");
-        capabilities.setCapability("platformVersion", "4.4");
-        capabilities.setCapability("app", "https://github.com/aws-samples/aws-device-farm-sample-app-for-android/blob/master/prebuilt/app-debug.apk?raw=true");
-        capabilities.setCapability("appPackage", "com.amazonaws.devicefarm.android.referenceapp");
-        capabilities.setCapability("appActivity", ".Activities.MainActivity");
-        capabilities.setCapability("browserName", "");
-        capabilities.setCapability("deviceOrientation", "portrait");
-        capabilities.setCapability("appiumVersion", "1.7.2");
+        capabilities.setCapability("platformVersion", "8.1.0");
+        // For an app from remote location
+        // capabilities.setCapability("app", "https://github.com/aws-samples/aws-device-farm-sample-app-for-android/blob/master/prebuilt/app-debug.apk?raw=true");
+        // For an app uploaded beforehand to testobject cloud:
+        capabilities.setCapability("testobject_app_id", "1");
+        // Record device performance into CSV:
+        capabilities.setCapability("recordDeviceVitals", true);
+        // capabilities.setCapability("name", "SL_Manually_configured_suite");
+        // Put the results under manually created suite ID:
+        // capabilities.setCapability("testObjectSuiteId", 7);
+
+        // capabilities.setCapability("deviceName", "Samsung Galaxy S4 Emulator");
+        // capabilities.setCapability("platformVersion", "4.4");
+        // capabilities.setCapability("app", "https://github.com/aws-samples/aws-device-farm-sample-app-for-android/blob/master/prebuilt/app-debug.apk?raw=true");
+        // capabilities.setCapability("appPackage", "com.amazonaws.devicefarm.android.referenceapp");
+        // capabilities.setCapability("appActivity", ".Activities.MainActivity");
+        // capabilities.setCapability("browserName", "");
+        // capabilities.setCapability("deviceOrientation", "portrait");
+        // capabilities.setCapability("appiumVersion", "1.9.1");
         capabilities.setCapability("build", build_info);
 
         driver = new AndroidDriver<MobileElement>(url, capabilities);

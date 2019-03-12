@@ -23,6 +23,11 @@
             <artifactId>java-client</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.testobject</groupId>
+            <artifactId>testobject-appium-java-api</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
