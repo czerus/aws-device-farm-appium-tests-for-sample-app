@@ -20,6 +20,7 @@ import Tests.AbstractBaseTests.NativeTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * Tests for image gallery
@@ -51,6 +52,10 @@ public class ImageGalleryTest extends NativeTests {
      */
     @Test
     public void checkIfImageGalleryDisplayed() {
-        Assert.assertTrue(imageGalleryPage.imageGalleryIsDisplayed());
+        String message = String.format("SauceOnDemandSessionID=%1$s job-name=%2$s",
+                (((RemoteWebDriver) driver).getSessionId()).toString(), "some job name");
+        System.out.println(message);
+        Assert.assertTrue(imageGalleryPage.imageGalleryIsDisplayed()
+        );
     }
 }

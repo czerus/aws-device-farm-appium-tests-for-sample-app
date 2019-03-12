@@ -17,6 +17,7 @@ package Tests;
 
 import Pages.AlertPage;
 import Tests.AbstractBaseTests.TestBase;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -49,6 +50,9 @@ public class AlertPageTest extends TestBase {
      */
     @Test
     public void testAlertMessage(){
+        String message = String.format("SauceOnDemandSessionID=%1$s job-name=%2$s",
+                (((RemoteWebDriver) driver).getSessionId()).toString(), "some job name");
+        System.out.println(message);
         alertPage.clickAlertsButton();
         Assert.assertEquals(alertPage.getAlertText(), ALERT_MESSAGE);
         alertPage.acceptAlertMessage();
