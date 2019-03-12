@@ -93,6 +93,7 @@ public abstract class TestBase {
         // capabilities.setCapability("app", "https://github.com/aws-samples/aws-device-farm-sample-app-for-android/blob/master/prebuilt/app-debug.apk?raw=true");
         // For an app uploaded beforehand to testobject cloud:
         capabilities.setCapability("testobject_app_id", "1");
+        capabilities.setCapability("testobject_test_name", build_info);
         // Record device performance into CSV:
         capabilities.setCapability("recordDeviceVitals", true);
         // capabilities.setCapability("name", "SL_Manually_configured_suite");
@@ -107,7 +108,7 @@ public abstract class TestBase {
         // capabilities.setCapability("browserName", "");
         // capabilities.setCapability("deviceOrientation", "portrait");
         // capabilities.setCapability("appiumVersion", "1.9.1");
-        capabilities.setCapability("build", build_info);
+        // capabilities.setCapability("build", build_info);
 
         driver = new AndroidDriver<MobileElement>(url, capabilities);
 
